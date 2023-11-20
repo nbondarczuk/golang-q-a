@@ -1,1 +1,1 @@
-# Thist is a list of examples for Q. A. presentation.
+# Thist is a set of examples for Q. A. presentation.
