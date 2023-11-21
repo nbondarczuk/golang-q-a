@@ -6,3 +6,11 @@ but in a different format.
 
 The client is supposed to be general use client like curl. It is done in
 the make file where example structures are used to test the server.
+
+## Local tools used
+
+The following tools shall be installed in order to run this example:
+- go
+- make
+- jq
+- curl
