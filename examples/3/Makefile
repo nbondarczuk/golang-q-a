@@ -1,19 +1,28 @@
+TARGETS=$(SERVER_TARGET)
 SERVER_TARGET=server
 SERVER_SRC=server.go
 
-TARGETS=$(SERVER_TARGET)
-
 all: build
 
-build: $(SERVER_TARGET)
+build: $(TARGETS)
 
 $(SERVER_TARGET): $(SERVER_SRC)
 	go build -o $(SERVER_TARGET) $(SERVER_SRC)
 
 run:
 	./server&
-	curl -X POST http://localhost/json -d ''
-	curl -X POST http://localhost/xml -d ''
+
+test: test-json2xml test-xml2json
+
+test-json2xml:
+	@printf '{"id":1,"name":"xxx","email":"yyy"} -> '
+	@curl http://localhost/json2xml -d '{"id":1,"name":"xxx","email":"yyy"}'
+	@echo
+
+test-xml2json:
+	@printf '<User><ID>1</ID><Name>xxx</Name><Email>yyy</Email></User> -> '
+	@curl http://localhost/xml2json -d '<User><ID>1</ID><Name>xxx</Name><Email>yyy</Email></User>'
+	@echo
 
 .PHONY: clean
 clean:

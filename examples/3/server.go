@@ -1,18 +1,49 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
+	"encoding/xml"
 	"net/http"
 )
 
-func json(w http.ResponseWriter, req *http.Request) {
+type User struct {
+	ID    int    `json:"id", xml:"id"`
+	Name  string `json:"name", xml:"name"`
+	Email string `json:"email", xml:"email"`
 }
 
-func json(w http.ResponseWriter, req *http.Request) {
+func json2xml(w http.ResponseWriter, r *http.Request) {
+	var user User
+	err := json.NewDecoder(r.Body).Decode(&user)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	err = xml.NewEncoder(w).Encode(user)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+}
+
+func xml2json(w http.ResponseWriter, r *http.Request) {
+	var user User
+	err := xml.NewDecoder(r.Body).Decode(&user)
+	if err != nil {
+		http.Error(w, err.Error(), 400)
+		return
+	}
+
+	err = json.NewEncoder(w).Encode(user)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
 }
 
 func main() {
-    http.HandleFunc("/json", json)
-    http.HandleFunc("/xml", xml)
-    http.ListenAndServe(":80", nil)
+	http.HandleFunc("/json2xml", json2xml)
+	http.HandleFunc("/xml2json", xml2json)
+	http.ListenAndServe(":80", nil)
 }
