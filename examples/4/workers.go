@@ -11,14 +11,20 @@ import (
 
 const defaultPendingJobsNo = 50
 
-// var t map[int]int
+var (
+	// t map[int]int
+	limit  chan interface{}
+	jobsNo *int
+	wg     sync.WaitGroup
+)
+
+func init() {
+	limit = make(chan interface{}, runtime.NumCPU())
+	jobsNo = flag.Int("jobs", defaultPendingJobsNo, "number of jobs for workers")
+	flag.Parse()
+}
 
 func main() {
-	var wg sync.WaitGroup
-	limit := make(chan interface{}, runtime.NumCPU())
-	jobsNo := flag.Int("jobs", defaultPendingJobsNo, "number of jobs for workers")
-	flag.Parse()
-	
 	fmt.Printf("Starting concurrent workers: %d (limit by CPUs no) on %d jobs\n",
 		cap(limit),
 		*jobsNo)
