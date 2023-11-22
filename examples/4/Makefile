@@ -10,6 +10,9 @@ $(TARGET): $(SRC)
 run:
 	go run $(RFLAGS) $(SRC)
 
+build:
+	go build $(RFLAGS) -o $(TARGET) $(SRC)
+
 vet:
 	go vet $(SRC)
 
