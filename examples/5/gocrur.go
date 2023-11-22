@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -32,7 +32,7 @@ func main() {
 
 	// Update it
 	db.Model(&user).Update("name", "yyy")
-	
+
 	// Read it gain
 	db.First(&user, 1)
 
