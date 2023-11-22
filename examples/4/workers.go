@@ -30,11 +30,11 @@ func main() {
 		*jobsNo)
 
 	// t = make(map[int]int)
-	workers := func(l chan<- interface{}, wg *sync.WaitGroup) {
+	workers := func(l chan interface{}, wg *sync.WaitGroup) {
 		for i := 0; i <= *jobsNo; i++ {
 			i := i
 
-			limit <- struct{}{}
+			l <- struct{}{}
 			wg.Add(1)
 
 			go func(x int, w *sync.WaitGroup) {
@@ -44,7 +44,7 @@ func main() {
 				time.Sleep(1 * time.Second)
 				fmt.Printf("Work done: %d\n", i)
 
-				<-limit
+				<-l
 			}(i, wg)
 		}
 	}
