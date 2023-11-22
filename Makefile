@@ -5,4 +5,4 @@ tidy:
 	go mod tidy
 
 clean:
-	rm -f *~
+	rm -f *~ examples/*/*~
