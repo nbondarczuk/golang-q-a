@@ -4,7 +4,9 @@ import (
 	"flag"
 	"fmt"
 	// "math/rand"
+	"os"
 	"runtime"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -20,8 +22,16 @@ var (
 
 func init() {
 	limit = make(chan interface{}, runtime.NumCPU())
-	jobsNo = flag.Int("jobs", defaultPendingJobsNo, "number of jobs for workers")
-	flag.Parse()
+	if jobs := os.Getenv("JOBS"); jobs == "" {
+		jobsNo = flag.Int("jobs", defaultPendingJobsNo, "number of jobs for workers")
+		flag.Parse()
+	} else {
+		n, err := strconv.Atoi(jobs)
+		if err != nil {
+			panic(err)
+		}
+		jobsNo = &n
+	}
 }
 
 func main() {

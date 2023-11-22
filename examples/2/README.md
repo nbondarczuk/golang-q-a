@@ -9,3 +9,7 @@ The following tools shall be installed in order to run this example:
 - go
 - make
 
+## Techniques demostrated
+
+- Writing http server and clients
+- Making handlers

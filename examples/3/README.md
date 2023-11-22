@@ -14,3 +14,11 @@ The following tools shall be installed in order to run this example:
 - make
 - jq
 - curl
+
+## Techniques demostrated
+
+- Writing http server and clients
+- Making request handlers
+- Using many source files for a module
+- Making unit tests
+- Making integration tests
