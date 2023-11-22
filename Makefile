@@ -4,3 +4,5 @@ init:
 tidy:
 	go mod tidy
 
+clean:
+	rm -f *~
