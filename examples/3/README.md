@@ -20,5 +20,7 @@ The following tools shall be installed in order to run this example:
 - Writing http server and clients
 - Making request handlers
 - Using many source files for a module
+- Making a public structure with annotations
+- Encoding/decoding JSON and XML formats
 - Making unit tests
 - Making integration tests

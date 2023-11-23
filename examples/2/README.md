@@ -12,4 +12,4 @@ The following tools shall be installed in order to run this example:
 ## Techniques demostrated
 
 - Writing http server and clients
-- Making handlers
+- Making handlers using standard library net/http
